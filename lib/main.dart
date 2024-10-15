@@ -2,21 +2,10 @@ import 'dart:developer';
 
 import 'package:demo_sdk/demo_sdk.dart';
 import 'package:demo_sdk/scan_qr_provider.dart';
-import 'package:face_camera/face_camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:trinsic_demo/test.dart';
 
-void main() async{
-  await FaceCamera.initialize();
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-      overlays: SystemUiOverlay.values);
-
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
-
+void main() {
+  
   runApp(const MyApp());
 }
 
