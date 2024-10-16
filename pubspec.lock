@@ -61,10 +61,10 @@ packages:
     dependency: "direct main"
     description:
       name: demo_sdk
-      sha256: "1b9077ef678a10913da6c68924af28cb472cf72a67f3c236547feadaf5a90b2f"
+      sha256: db8593758aa9d1e860d227a2fd99f0b9248c92ca5d23d2aa92d60ce32b347907
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.34"
+    version: "0.0.40"
   fake_async:
     dependency: transitive
     description:
