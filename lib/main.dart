@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:demo_sdk/demo_sdk.dart';
 import 'package:demo_sdk/scan_qr_provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -61,6 +62,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String _token = "";
+  bool _loading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+
     return Scaffold(
       appBar: AppBar(
         // TRY THIS: Try changing the color here to a specific color (to
@@ -80,25 +83,30 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
+      body: _loading?Center(child: CupertinoActivityIndicator(),): Center(
         child: Column(
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: GestureDetector(
                 onTap: () async {
+                  setState(() {
+                    
+                    _loading =true;
+                  });
                   var loginData = await Iden2Provider().login(context);
                   log("loginDetails $loginData");
                   setState(() {
                     _token = loginData;
+                    _loading =false;
                   });
                 },
                 child: Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                         color: Colors.amber),
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    child: Text("Login")),
+                    padding:const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    child:const Text("Login")),
               ),
             ),
             Padding(
@@ -111,21 +119,21 @@ class _MyHomePageState extends State<MyHomePage> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                         color: Colors.amber),
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    child: Text("Scan QR")),
+                    padding:const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    child:const Text("Scan QR")),
               ),
             )
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          // var loginData = await Iden2Provider().login(context);
-          // log("loginDetails $loginData");
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () async {
+      //     // var loginData = await Iden2Provider().login(context);
+      //     // log("loginDetails $loginData");
+      //   },
+      //   tooltip: 'Increment',
+      //   child: const Icon(Icons.add),
+      // ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
